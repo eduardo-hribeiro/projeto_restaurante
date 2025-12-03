@@ -12,7 +12,7 @@ O objetivo é simular o funcionamento de um sistema de restaurante, contendo fun
  ├── manipulacao.sql     # Script completo com inserção, atualização e remoção de dados
  ├── consulta.sql        # Script completo com consultas por ordens e limites, além de criação de backup
  ├── condicional.sql     # Script completo com consultas através de estruturas condicionais
- └── README.md            # Documentação do projeto
+ └── README.md           # Documentação do projeto
 ```
 
 ---
