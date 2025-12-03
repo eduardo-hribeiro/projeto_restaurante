@@ -7,8 +7,11 @@ O objetivo é simular o funcionamento de um sistema de restaurante, contendo fun
 ## 📁 Estrutura do Projeto
 
 ```
-📦 restaurante  
- ├── condicional.sql     # Script completo com criação, inserção, consultas e atualizações  
+📦 restaurante
+ ├── definicao.sql       # Script completo com criação das tabelas
+ ├── manipulacao.sql     # Script completo com inserção, atualização e remoção de dados
+ ├── consulta.sql        # Script completo com consultas por ordens e limites, além de criação de backup
+ ├── condicional.sql     # Script completo com consultas através de estruturas condicionais
  └── README.md            # Documentação do projeto
 ```
 
@@ -53,7 +56,7 @@ Inclui:
 - 30 clientes  
 - 20 produtos  
 - 20 registros de info_produtos  
-- 50+ pedidos reais
+- 50+ pedidos 
 
 ### ✔ Atualizações Realizadas
 - Alteração de cargo e salário de funcionários  
@@ -70,7 +73,7 @@ Inclui:
 
 ## 🔍 Consultas Executadas
 
-Essas foram as consultas solicitadas na atividade e adicionadas ao script:
+Essas foram as consultas solicitadas:
 
 ### 🧾 Seleções básicas
 - Pedidos do funcionário `id_funcionario = 4` com status **Pendente**
@@ -125,7 +128,7 @@ FROM funcionarios;
 ## 🚀 Como Executar
 
 1. Abra o **MySQL Workbench**
-2. Importe o arquivo `condicional.sql`
+2. Importe os arquivos 
 3. Execute o script completo ou as seções desejadas
 4. Verifique os dados nas tabelas geradas
 
