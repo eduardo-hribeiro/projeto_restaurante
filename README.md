@@ -141,6 +141,23 @@ Projeto desenvolvido para estudos de SQL e modelagem de banco de dados.
 
 ---
 
+## 🔧 Requisitos
+
+**MySQL 8.0+**
+
+**Charset recomendado: utf8mb4**
+
+**MySQL Workbench 8.0+ (opcional, mas recomendado)***
+
+---
+
 ## 📄 Licença
 
-Este projeto é de uso educacional e livre para estudos.
+Este projeto é de uso educacional.
+Você pode reutilizar o conteúdo para estudos, desde que mantenha os créditos ao autor.
+
+---
+
+🗓️ Última atualização
+
+Última atualização: Novembro de 2025
