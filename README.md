@@ -1,107 +1,87 @@
-# 🍽️ Banco de Dados – Restaurante
-Este projeto foi criado com o propósito de exercitar conceitos de **SQL**, incluindo modelagem, criação de tabelas, inserção de dados, consultas condicionais e manipulação de registros.
-O banco simula o funcionamento de um restaurante, abrangendo funcionários, clientes, produtos, pedidos e informações complementares dos itens.
+# 🍽️ BD_restaurante
+
+## 🚀 Descrição  
+Este projeto é um sistema de banco de dados relacional para gestão de um restaurante. Ele contempla modelagem com tabelas normalizadas, registro de funcionários, clientes, produtos, pedidos e itens dos pedidos. O objetivo é aplicar boas práticas de modelagem de dados e estruturação em SQL, de modo a garantir integridade, flexibilidade e clareza no esquema.
 
 ---
 
 ## 📁 Estrutura do Projeto
 
 ```
-📦 restaurante
- ├── definicao.sql       # Script completo com criação das tabelas
- ├── manipulacao.sql     # Script completo com inserção, atualização e remoção de dados
- ├── consulta.sql        # Script completo com consultas por ordens e limites, além de criação de backup
- ├── condicional.sql     # Script completo com consultas através de estruturas condicionais
- └── README.md           # Documentação do projeto
+BD_restaurante/
+│
+├── definicao.sql — Script principal: criação das tabelas normalizadas e estrutura completa.
+├── inserts.sql — Inserções iniciais (funcionários, clientes, produtos, info_produtos, pedidos, itens_pedido).
+├── consultas.sql — Exemplos de consultas SELECT, filtros, ordenações e buscas por critérios.
+├── updates.sql — Exemplos de comandos UPDATE / DELETE para manipulação de dados.
+└── README.md — Documentação deste projeto.
 ```
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🗄️ Modelo de Dados & Tabelas  
 
-- **MySQL**
-- **MySQL Workbench**
-- Comandos SQL: `CREATE`, `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `JOIN`, `LIKE`, `BETWEEN`, `CASE`, `IFNULL`, `ORDER BY`, `LIMIT`, `IN`.
+O banco possui as seguintes tabelas principais, com relacionamentos adequados:
 
----
+| Tabela             | Função / Conteúdo |
+|--------------------|------------------|
+| **cargos**         | Lista cargos de funcionários com `id_cargo`, `nome_cargo` e `nível`. |
+| **funcionários**   | Dados dos funcionários: nome, CPF, cargo (FK para cargos), salário, data de admissão etc. |
+| **clientes**       | Dados dos clientes do restaurante. |
+| **produtos**       | Produtos ou pratos oferecidos pelo restaurante (nome, descrição, preço, categoria). |
+| **info_produtos**  | Informações adicionais sobre produtos: ingredientes, fornecedor etc. |
+| **pedidos**        | Registros de pedidos feitos por clientes — sem detalhe de item, apenas pedido geral. Usa `ENUM` para `status`. |
+| **itens_pedido**   | Tabela de junção entre pedidos e produtos, relacionando cada pedido aos seus produtos/itens, com `quantidade` e `preco_unitario`. |
 
-## 🗂️ Estrutura das Tabelas
-
-O banco contém as seguintes tabelas:
-
-- **funcionarios** — Dados dos funcionários do restaurante  
-- **clientes** — Registro de clientes  
-- **produtos** — Produtos vendidos  
-- **info_produtos** — Informações extras como ingredientes e fornecedor  
-- **pedidos** — Histórico de pedidos  
-- **backup_pedidos** — Cópia da tabela de pedidos
-
-As tabelas possuem **chaves primárias**, **chaves estrangeiras** e restrições como `UNIQUE` e `NOT NULL`.
+Esse modelo normalizado permite representar pedidos com múltiplos produtos de forma correta, sem redundâncias e com histórico consistente.
 
 ---
 
-## 🧪 Funcionalidades do Script (condicional.sql)
+## ✅ Boas Práticas e Normalização  
 
-### ✔ Criação do Banco e Tabelas
-O script:
-
-- Cria o banco de dados `restaurante`
-- Cria todas as tabelas com chaves e relacionamentos
-- Adiciona comentários e restrições
-
-### ✔ Inserção de Dados
-Inclui:
-
-- 10 funcionários  
-- 30 clientes  
-- 20 produtos  
-- 20 registros de info_produtos  
-- 50+ pedidos 
-
-### ✔ Atualizações Realizadas
-- Alteração de cargo e salário de funcionários  
-- Atualização automática de pedidos anteriores a uma data para “Concluído”  
-- Atualização de status para `NULL`
-
-### ✔ Remoção
-- Exclusão de funcionário por ID
-
-### ✔ Backup
-- Criação da tabela `backup_pedidos` com base nos registros atuais
+- Uso de **chaves primárias (PK)** e **chaves estrangeiras (FK)** para garantir integridade referencial.  
+- Substituição de campos de texto livre (ex: cargo como `VARCHAR`) por FK para `cargos`, garantindo padronização.  
+- Separação entre pedido e itens do pedido — evitando repetição e permitindo 1 pedido ⇒ N itens.  
+- Uso de `ENUM` para o status do pedido, limitando os valores possíveis.  
+- Estrutura preparada para fácil manutenção, extensão e evolução.
 
 ---
 
-## 🔍 Consultas Executadas
+## 🛠️ Tecnologias / Ambiente  
 
-Essas foram as consultas solicitadas:
+- Banco: **MySQL 8.x**  
+- Ferramenta sugerida: **MySQL Workbench** ou outro cliente SQL compatível  
+- Scripts em SQL puro (sem dependências externas)  
 
-### 🧾 Seleções básicas
-- Pedidos do funcionário `id_funcionario = 4` com status **Pendente**
-- Pedidos com status diferente de **Concluído**
-- Pedidos com `id_produto` em (1, 3, 5, 7, 8)
-- Clientes cujo nome começa com “C”
+---
 
-### 🍗 Pesquisas por texto
-- Produtos contendo **Carne** ou **Frango**
-- Ingredientes contendo a palavra “carne”
+## 🎯 Como Usar  
 
-### 💰 Consultas financeiras
-- Produtos com preço entre **20 e 30**
-- Os **5 produtos mais caros**
-- Dois pratos principais em promoção (usando `LIMIT` e `OFFSET`)
+- Clone este repositório:  
+   ```bash
+   git clone https://github.com/eduardo-hribeiro/BD_restaurante.git
+   
+- Abra o arquivo definicao.sql no MySQL Workbench e execute-o para criar o banco e as tabelas.
 
-### 🚫 Status nulos
-- Pedidos com status `NULL`
-- Exibição de status usando:
-  ```sql
-  IFNULL(status, 'Cancelado')
-  ```
+- Em seguida, execute inserts.sql para popular o banco com dados iniciais.
 
-### 📊 Análise salarial
-- Classificação de funcionários como:
-  - **Acima da média**
-  - **Abaixo da média**
-  usando `CASE WHEN`.
+- Use consultas.sql para testar consultas — filtros, buscas, ordenações, joins etc.
+
+- Teste updates.sql para verificar operações de atualização ou remoção de dados.
+
+---
+
+## 🔍 Exemplos de Algumas Consultas Executadas
+
+- Selecionar todos os produtos com preço acima de determinado valor.
+
+- Buscar clientes que nasceram antes de uma certa data.
+
+- Encontrar pedidos de um cliente ou funcionários específicos.
+
+- Listar os itens de cada pedido com quantidade e preço unitário.
+
+- Calcular o valor total de um pedido somando os itens.
 
 ---
 
@@ -125,22 +105,17 @@ FROM funcionarios;
 
 ---
 
-## 🔧 Requisitos
+## 🧩 Potenciais Melhorias / Extensões Futuras
 
-**MySQL 8.0+**
+- Adicionar tabela de status_pedido para status mais flexíveis (caso mude do ENUM).
 
-**Charset recomendado: utf8mb4**
+- Registrar histórico de preços dos produtos para manter histórico real de pedidos antigos.
 
-**MySQL Workbench 8.0+ (opcional, mas recomendado)***
+- Adicionar controle de estoque / quantidade disponível de produtos.
 
----
+- Criar views para relatórios: pedidos por data, por cliente, por produto, faturamento total, etc.
 
-## 🚀 Como Executar
-
-1. Abra o **MySQL Workbench**
-2. Importe os arquivos 
-3. Execute o script completo ou as seções desejadas
-4. Verifique os dados nas tabelas geradas
+- Criar scripts de backup / restauração.
 
 ---
 
@@ -160,4 +135,4 @@ Você pode reutilizar o conteúdo para estudos, desde que mantenha os créditos 
 
 🗓️ Última atualização
 
-Última atualização: Novembro de 2025
+Última atualização: Dezembro de 2025
