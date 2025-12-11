@@ -12,7 +12,7 @@ BD_restaurante/
 │
 ├── definicao.sql — Script principal: criação das tabelas normalizadas e estrutura completa.
 ├── inserts.sql — Inserções iniciais (funcionários, clientes, produtos, info_produtos, pedidos, itens_pedido).
-├── consultas.sql — Exemplos de consultas SELECT, filtros, ordenações e buscas por critérios.
+├── consultas.sql — Exemplos de consultas SELECT, filtros, ordenações, buscas por critérios, JOINs, funções de agregadoras e uso de CTEs.
 ├── updates.sql — Exemplos de comandos UPDATE / DELETE para manipulação de dados.
 └── README.md — Documentação deste projeto.
 ```
@@ -103,19 +103,39 @@ SELECT nome, cargo, salario,
 FROM funcionarios;
 ```
 
+### Listar itens de cada pedido
+```sql
+SELECT p.id_pedido, c.nome AS cliente, pr.nome AS produto,
+       ip.quantidade, ip.preco_unitario
+FROM pedidos p
+JOIN clientes c ON p.id_cliente = c.id_cliente
+JOIN itens_pedido ip ON p.id_pedido = ip.id_pedido
+JOIN produtos pr ON ip.id_produto = pr.id_produto;
+```
+
 ---
 
-## 🧩 Potenciais Melhorias / Extensões Futuras
+## 🧠 Destaque: Uso de CTE (Common Table Expressions)
+O projeto inclui consultas utilizando CTEs, que melhoram:
+- Legibilidade
+- Organização
+- Reutilização de lógica
+- Clareza nas operações que exigem múltiplas etapas
+- Exemplo aplicado no projeto:
 
-- Adicionar tabela de status_pedido para status mais flexíveis (caso mude do ENUM).
-
-- Registrar histórico de preços dos produtos para manter histórico real de pedidos antigos.
-
-- Adicionar controle de estoque / quantidade disponível de produtos.
-
-- Criar views para relatórios: pedidos por data, por cliente, por produto, faturamento total, etc.
-
-- Criar scripts de backup / restauração.
+Exemplo aplicado no projeto:
+``` sql
+WITH ranking_produtos AS (
+    SELECT 
+        nome,
+        preco,
+        ROW_NUMBER() OVER (ORDER BY preco DESC) AS ranking_preco
+    FROM produtos
+)
+SELECT * 
+FROM ranking_produtos
+WHERE ranking_preco <= 5;
+```
 
 ---
 
