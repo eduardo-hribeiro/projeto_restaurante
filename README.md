@@ -12,7 +12,7 @@ BD_restaurante/
 │
 ├── definicao.sql — Script principal: criação das tabelas normalizadas e estrutura completa.
 ├── inserts.sql — Inserções iniciais (funcionários, clientes, produtos, info_produtos, pedidos, itens_pedido).
-├── consultas.sql — Exemplos de consultas SELECT, filtros, ordenações, buscas por critérios, JOINs, funções de agregadoras e uso de CTEs.
+├── consultas.sql — Contém consultas simples e avançadas, organizadas por blocos comentados, incluindo filtros, JOINs, agregações, CTEs e consultas analíticas.
 ├── updates.sql — Exemplos de comandos UPDATE / DELETE para manipulação de dados.
 ├── views.sql - Exemplos de criações de visualizações para simplificar consultas de dados.
 ├── functions.sql - Consultas com o objetivo de retornar um valor específico.
