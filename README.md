@@ -14,7 +14,12 @@ BD_restaurante/
 ├── inserts.sql — Inserções iniciais (funcionários, clientes, produtos, info_produtos, pedidos, itens_pedido).
 ├── consultas.sql — Exemplos de consultas SELECT, filtros, ordenações, buscas por critérios, JOINs, funções de agregadoras e uso de CTEs.
 ├── updates.sql — Exemplos de comandos UPDATE / DELETE para manipulação de dados.
+├── views.sql - Exemplos de criações de visualizações para simplificar consultas de dados.
+├── functions.sql - Consultas com o objetivo de retornar um valor específico.
 └── README.md — Documentação deste projeto.
+
+Os arquivos foram separados para melhor organização, visualização e manutenção do banco.
+
 ```
 
 ---
